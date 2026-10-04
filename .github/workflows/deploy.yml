@@ -1,0 +1,88 @@
+name: Deploy Assignments to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Build React Apps
+      - name: Build Assignment 4
+        if: hashFiles('Assignment4/package.json') != ''
+        run: |
+          cd Assignment4
+          npm install
+          npm run build
+
+      - name: Build Assignment 5
+        if: hashFiles('Assignment5/package.json') != ''
+        run: |
+          cd Assignment5
+          npm install
+          npm run build
+
+      - name: Build Assignment 6 (if exists)
+        if: hashFiles('Assignment6/package.json') != ''
+        run: |
+          cd Assignment6
+          npm install
+          npm run build
+
+      # Assemble clean deployment directory
+      - name: Prepare Site Directory
+        run: |
+          mkdir -p _site
+          touch _site/.nojekyll
+
+          # Copy main portal hub
+          cp index.html _site/
+
+          # Copy static assignments (HTML/CSS/JS)
+          for dir in Assignment1 Assignment2 Asiignment3 Assignment3; do
+            if [ -d "$dir" ]; then
+              cp -r "$dir" _site/
+            fi
+          done
+
+          # Copy built React assignments (dist folders)
+          for app in Assignment4 Assignment5 Assignment6; do
+            if [ -d "$app/dist" ]; then
+              mkdir -p "_site/$app"
+              cp -r "$app/dist" "_site/$app/"
+            fi
+          done
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '_site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
