@@ -1,0 +1,91 @@
+.app-container {
+  max-width: 550px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.header h1 {
+  font-size: 24px;
+  color: #222222;
+  margin-bottom: 8px;
+}
+
+.header .subtitle {
+  font-size: 14px;
+  color: #666666;
+  line-height: 1.5;
+}
+
+.counter-card {
+  background: #ffffff;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+  padding: 35px 25px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.counter-card h2 {
+  font-size: 16px;
+  color: #555555;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.count-display {
+  font-size: 64px;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 30px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-decrement {
+  background-color: #e2e8f0;
+  color: #2d3748;
+}
+
+.btn-decrement:hover {
+  background-color: #cbd5e0;
+}
+
+.btn-reset {
+  background-color: #6c757d;
+  color: #ffffff;
+}
+
+.btn-reset:hover {
+  background-color: #5a6268;
+}
+
+.btn-increment {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.btn-increment:hover {
+  background-color: #0056b3;
+}
