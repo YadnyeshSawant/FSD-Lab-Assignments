@@ -2,6 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content="0; url=./dist/index.html" />
+    <script>
+      if (window.location.protocol !== 'file:' && !window.__vite_plugin_react_preamble_installed__) {
+        window.location.replace('./dist/index.html');
+      }
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Assignment 6 - React Counter App</title>
