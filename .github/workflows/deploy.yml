@@ -67,11 +67,13 @@ jobs:
             fi
           done
 
-          # Copy built React assignments (dist folders)
+          # Copy built React assignments (both to $app and $app/dist for compatibility)
           for app in Assignment4 Assignment5 Assignment6; do
             if [ -d "$app/dist" ]; then
               mkdir -p "_site/$app"
-              cp -r "$app/dist" "_site/$app/"
+              cp -r "$app/dist/." "_site/$app/"
+              mkdir -p "_site/$app/dist"
+              cp -r "$app/dist/." "_site/$app/dist/"
             fi
           done
 
